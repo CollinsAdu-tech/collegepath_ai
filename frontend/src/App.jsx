@@ -4,11 +4,21 @@ import ChatInput from "./components/ChatInput";
 import SuggestionChips from "./components/SuggestionChips";
 import CategoryMenu from "./components/CategoryMenu";
 import { useChat } from "./hooks/useChat";
+import NavBar from "./components/NavBar";
 import { checkHealth } from "./services/api";
 import "./App.css";
 
 export default function App() {
-  const { messages, loading, selectedCategory, setSelectedCategory, sendMessage } = useChat();
+  const {
+    messages,
+    loading,
+    selectedCategory,
+    setSelectedCategory,
+    sendMessage,
+    clearChat,
+    goHome,
+    refreshLast,
+  } = useChat();
   const [online, setOnline] = useState(null);
 
   useEffect(() => {
@@ -16,6 +26,11 @@ export default function App() {
   }, []);
 
   const hasStarted = messages.length > 0;
+
+  const handleRefresh = () => {
+    checkHealth().then(setOnline);
+    refreshLast();
+  };
 
   return (
     <div className="app">
@@ -30,6 +45,13 @@ export default function App() {
             {online === null ? "Checking…" : online ? "Online" : "Offline"}
           </span>
         </div>
+        <NavBar
+          messages={messages}
+          loading={loading}
+          onHome={goHome}
+          onRefresh={handleRefresh}
+          onClear={clearChat}
+        />
       </header>
 
       <main className="app__main" id="main-content">

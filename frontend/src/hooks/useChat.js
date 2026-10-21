@@ -18,17 +18,27 @@ export function useChat() {
   // same tick, before React has re-rendered with loading=true.
   const inFlight = useRef(false);
 
-  const sendMessage = useCallback(async (rawText) => {
+  const sendMessage = useCallback(async (rawText, { replaceLast = false } = {}) => {
     const text = rawText.trim();
     if (!text || inFlight.current) return;
 
     inFlight.current = true;
     setLoading(true);
 
-    setMessages((prev) => [
-      ...prev,
-      { id: nextId++, role: "user", content: text },
-    ]);
+    if (replaceLast) {
+      // Drop the previous assistant reply (and its user turn) so a
+      // refresh re-asks the same question instead of duplicating it.
+      setMessages((prev) => {
+        const idx = prev.map((m) => m.role).lastIndexOf("user");
+        const kept = idx === -1 ? prev : prev.slice(0, idx);
+        return [...kept, { id: nextId++, role: "user", content: text }];
+      });
+    } else {
+      setMessages((prev) => [
+        ...prev,
+        { id: nextId++, role: "user", content: text },
+      ]);
+    }
 
     try {
       const response = await sendMessageToApi(text);
@@ -62,7 +72,29 @@ export function useChat() {
     }
   }, []);
 
+  /** Wipe the conversation (keeps the selected category). */
+  const clearChat = useCallback(() => {
+    if (inFlight.current) return;
+    setMessages([]);
+  }, []);
+
+  /** Back to the landing view: empty chat and no category filter. */
+  const goHome = useCallback(() => {
+    if (inFlight.current) return;
+    setMessages([]);
+    setSelectedCategory(null);
+  }, []);
+
+  /** Re-ask the most recent question and replace its answer. */
+  const refreshLast = useCallback(() => {
+    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    if (lastUser) sendMessage(lastUser.content, { replaceLast: true });
+  }, [messages, sendMessage]);
+
   return {
+    clearChat,
+    goHome,
+    refreshLast,
     messages,
     loading,
     selectedCategory,
