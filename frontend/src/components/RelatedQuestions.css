@@ -1,0 +1,41 @@
+.related {
+  margin-top: 14px;
+}
+
+.related__label {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.related__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.related__item {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  font-size: 14px;
+  color: var(--accent-strong);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.15s ease;
+}
+
+.related__item:hover {
+  background: var(--accent-tint);
+}
+
+.related__item span {
+  color: var(--ink-faint);
+}

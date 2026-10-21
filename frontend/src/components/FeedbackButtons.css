@@ -1,0 +1,27 @@
+.feedback {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+
+.feedback__btn {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.feedback__btn:hover {
+  border-color: var(--accent);
+}
+
+.feedback--done {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--ink-faint);
+}

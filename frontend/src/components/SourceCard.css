@@ -1,0 +1,41 @@
+.source-line {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 13px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.source-line__mark {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.source-line a {
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.source-line a:hover {
+  color: var(--accent-strong);
+}
+
+.source-line__date {
+  color: var(--ink-faint);
+}
+
+.source-line__badge {
+  background: var(--gold-tint);
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 600;
+}

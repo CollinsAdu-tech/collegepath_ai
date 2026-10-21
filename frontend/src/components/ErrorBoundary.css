@@ -1,0 +1,29 @@
+.crash-screen {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 24px;
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+.crash-screen__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.crash-screen__body {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  margin: 0 0 16px;
+}
+
+.crash-screen button {
+  border: none;
+  background: var(--accent);
+  color: var(--surface);
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+}

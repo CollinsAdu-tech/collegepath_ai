@@ -1,0 +1,31 @@
+.suggestions {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.suggestions__item {
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14.5px;
+  color: var(--ink);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.suggestions__item:hover {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+.suggestions__empty {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--ink-faint);
+}
